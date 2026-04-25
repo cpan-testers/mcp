@@ -19,6 +19,7 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Future::AsyncAwait" => "0.52",
     "Log::Any" => "1.719",
+    "Log::Any::Adapter::OpenTelemetry" => 0,
     "MCP" => "0.08",
     "Mojolicious" => 9
   },
@@ -44,6 +45,7 @@ my %FallbackPrereqs = (
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
   "Log::Any" => "1.719",
+  "Log::Any::Adapter::OpenTelemetry" => 0,
   "MCP" => "0.08",
   "Mojolicious" => 9,
   "Test2::V1" => "1.302219",

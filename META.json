@@ -33,6 +33,7 @@
          "requires" : {
             "Future::AsyncAwait" : "0.52",
             "Log::Any" : "1.719",
+            "Log::Any::Adapter::OpenTelemetry" : "0",
             "MCP" : "0.08",
             "Mojolicious" : "9",
             "perl" : "5.040"

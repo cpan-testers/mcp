@@ -65,11 +65,19 @@ sub new($class, @args) {
             $LOG->warn('Bad response', { tx => $tx });
             next;
           }
+          if (!$tx->res->is_success) {
+            $LOG->warn('Bad response', { code => $tx->res->code, body => $tx->res->body });
+            next;
+          }
           push @reports, @{ $tx->res->json };
         }
       }
       else {
         my $tx = await $self->ua->get_p( $url );
+        if (!$tx->res->is_success) {
+          $LOG->warn('Bad response', { code => $tx->res->code, body => $tx->res->body });
+          return "Error: " . $tx->res->body;
+        }
         push @reports, @{ $tx->res->json };
       }
 

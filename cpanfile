@@ -3,6 +3,7 @@
 
 requires "Future::AsyncAwait" => "0.52";
 requires "Log::Any" => "1.719";
+requires "Log::Any::Adapter::OpenTelemetry" => "0";
 requires "MCP" => "0.08";
 requires "Mojolicious" => "9";
 requires "perl" => "5.040";
