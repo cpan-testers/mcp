@@ -1,0 +1,67 @@
+{
+   "abstract" : "Write a sentence about what it does",
+   "author" : [
+      "Doug Bell <preaction@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 6.036, CPAN::Meta::Converter version 2.150010",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : 2
+   },
+   "name" : "CPAN-Testers-MCP",
+   "no_index" : {
+      "directory" : [
+         "eg",
+         "examples",
+         "inc",
+         "share",
+         "t",
+         "xt"
+      ]
+   },
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "MCP" : "0.08",
+            "Mojolicious" : "9",
+            "Test2::V1" : "1.302219",
+            "perl" : "5.040"
+         }
+      },
+      "test" : {
+         "recommends" : {
+            "CPAN::Meta" : "2.120900"
+         },
+         "requires" : {
+            "ExtUtils::MakeMaker" : "0",
+            "File::Spec" : "0",
+            "IO::Handle" : "0",
+            "IPC::Open3" : "0",
+            "Test::More" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "CPAN::Testers::MCP" : {
+         "file" : "lib/CPAN/Testers/MCP.pm",
+         "version" : "0.001"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {},
+   "version" : "0.001",
+   "x_authority" : "cpan:PREACTION",
+   "x_generated_by_perl" : "v5.42.0",
+   "x_serialization_backend" : "Cpanel::JSON::XS version 4.40",
+   "x_spdx_expression" : "Artistic-1.0-Perl OR GPL-1.0-or-later"
+}
+
