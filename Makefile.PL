@@ -18,6 +18,7 @@ my %WriteMakefileArgs = (
   "NAME" => "CPAN::Testers::MCP",
   "PREREQ_PM" => {
     "Future::AsyncAwait" => "0.52",
+    "Log::Any" => "1.719",
     "MCP" => "0.08",
     "Mojolicious" => 9
   },
@@ -42,6 +43,7 @@ my %FallbackPrereqs = (
   "Future::AsyncAwait" => "0.52",
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
+  "Log::Any" => "1.719",
   "MCP" => "0.08",
   "Mojolicious" => 9,
   "Test2::V1" => "1.302219",
