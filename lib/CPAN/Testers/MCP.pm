@@ -16,7 +16,9 @@ use CPAN::Testers::MCP::Server;
 
 sub startup( $self ) {
   my $server = CPAN::Testers::MCP::Server->new;
-  $self->routes->any( '/' => $server->to_action );
+  my $mcp_action = $server->to_action;
+  $self->routes->get( '/' => 'index' );
+  $self->routes->post( '/' => $server->to_action );
 }
 
 1;

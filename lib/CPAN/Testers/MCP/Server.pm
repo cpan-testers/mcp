@@ -24,7 +24,7 @@ sub new($class, @args) {
   my $self = $class->SUPER::new(@args);
 
   $self->tool(
-    name => 'list_dist',
+    name => 'list_reports_by_dist',
     description => 'List reports from CPAN Testers by distribution',
     input_schema => {
       type => 'object',
@@ -76,6 +76,36 @@ sub new($class, @args) {
       return join "\n\n", map {
         "GUID: $_->{guid}\nOS: $_->{osname}\nPlatform: $_->{platform}\nPerl: $_->{perl}\nGrade: $_->{grade}"
       } @reports;
+    },
+  );
+
+  $self->tool(
+    name => 'list_dists_by_author',
+    description => 'List distributions by a CPAN author PAUSE ID',
+    input_schema => {
+      type => 'object',
+      required => [qw( author )],
+      properties => {
+        author => {
+          type => 'string',
+        },
+      },
+    },
+    code => async sub ($tool, $args) {
+      my $url = sprintf 'https://api.cpantesters.org/v3/upload/author/%s', $args->{author};
+      my $tx = await $self->ua->get_p( $url );
+      my @uploads = @{ $tx->res->json };
+      my %max_version;
+      for my $upload ( @uploads ) {
+        my ($dist, $version) = (@{$upload}{qw( dist version )});
+        if (!$max_version{$dist} || $max_version{$dist}{version} lt $version) {
+          $max_version{$dist} = $upload;
+        }
+      }
+
+      return join "\n\n", map {
+        "Dist: $_->{dist}\nVersion: $_->{version}\nDate: $_->{release}"
+      } values %max_version;
     },
   );
 
