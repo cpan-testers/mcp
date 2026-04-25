@@ -1,0 +1,32 @@
+#!perl
+# PODNAME: cpan-testers-mcp-service
+our $VERSION = '0.001';
+
+=head1 NAME
+
+cpan-testers-mcp-service -- Entrypoint for the CPAN Testers MCP service
+
+=head1 SYNOPSIS
+
+  cpan-testers-mcp daemon
+  cpan-testers-mcp help
+
+=head1 DESCRIPTION
+
+This program loads the CPAN Testers MCP, a L<Mojolicious> web
+application. For more detailed help, see C<cpan-testers-mcp help>.
+
+=head1 SEE ALSO
+
+L<CPAN::Testers::MCP>, L<MCP>, L<Mojolicious>
+
+=cut
+
+use strict;
+use warnings;
+use File::Spec::Functions qw( catdir updir );
+use FindBin ();
+use lib "$FindBin::Bin/../lib";
+
+require Mojolicious::Commands;
+Mojolicious::Commands->start_app( 'CPAN::Testers::MCP' );

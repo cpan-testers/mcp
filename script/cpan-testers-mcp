@@ -1,0 +1,31 @@
+#!/Users/doug/perl5/perlbrew/perls/perl-5.42.0/bin/perl
+# PODNAME: cpan-testers-mcp
+our $VERSION = '0.001';
+
+=head1 NAME
+
+cpan-testers-mcp -- STDIO version of CPAN Testers MCP service
+
+=head1 SYNOPSIS
+
+  cpan-testers-mcp
+
+=head1 DESCRIPTION
+
+This program loads the CPAN Testers MCP as a STDIO RPC service.
+
+=head1 SEE ALSO
+
+L<CPAN::Testers::MCP>, L<MCP>
+
+=cut
+
+use strict;
+use warnings;
+use File::Spec::Functions qw( catdir updir );
+use FindBin ();
+use lib "$FindBin::Bin/../lib";
+use Log::Any::Adapter qw( Stderr );
+
+use CPAN::Testers::MCP::Server;
+CPAN::Testers::MCP::Server->new->to_stdio;

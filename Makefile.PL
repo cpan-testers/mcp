@@ -7,7 +7,7 @@ use 5.040;
 use ExtUtils::MakeMaker;
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Write a sentence about what it does",
+  "ABSTRACT" => "Model Context Protocol server for CPAN Testers data",
   "AUTHOR" => "Doug Bell <preaction\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
@@ -17,15 +17,16 @@ my %WriteMakefileArgs = (
   "MIN_PERL_VERSION" => "5.040",
   "NAME" => "CPAN::Testers::MCP",
   "PREREQ_PM" => {
+    "Future::AsyncAwait" => "0.52",
     "MCP" => "0.08",
-    "Mojolicious" => 9,
-    "Test2::V1" => "1.302219"
+    "Mojolicious" => 9
   },
   "TEST_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0,
     "File::Spec" => 0,
     "IO::Handle" => 0,
     "IPC::Open3" => 0,
+    "Test2::V1" => "1.302219",
     "Test::More" => 0
   },
   "VERSION" => "0.001",
@@ -38,6 +39,7 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
+  "Future::AsyncAwait" => "0.52",
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
   "MCP" => "0.08",

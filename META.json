@@ -1,5 +1,5 @@
 {
-   "abstract" : "Write a sentence about what it does",
+   "abstract" : "Model Context Protocol server for CPAN Testers data",
    "author" : [
       "Doug Bell <preaction@cpan.org>"
    ],
@@ -31,9 +31,9 @@
       },
       "runtime" : {
          "requires" : {
+            "Future::AsyncAwait" : "0.52",
             "MCP" : "0.08",
             "Mojolicious" : "9",
-            "Test2::V1" : "1.302219",
             "perl" : "5.040"
          }
       },
@@ -46,6 +46,7 @@
             "File::Spec" : "0",
             "IO::Handle" : "0",
             "IPC::Open3" : "0",
+            "Test2::V1" : "1.302219",
             "Test::More" : "0"
          }
       }

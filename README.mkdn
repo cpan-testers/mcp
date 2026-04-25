@@ -1,6 +1,6 @@
 # NAME
 
-CPAN::Testers::MCP - Write a sentence about what it does
+CPAN::Testers::MCP - Model Context Protocol server for CPAN Testers data
 
 # VERSION
 

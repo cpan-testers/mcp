@@ -1,6 +1,6 @@
 package CPAN::Testers::MCP;
 our $VERSION = '0.001';
-# ABSTRACT: Write a sentence about what it does
+# ABSTRACT: Model Context Protocol server for CPAN Testers data
 
 =head1 SYNOPSIS
 
@@ -10,10 +10,14 @@ our $VERSION = '0.001';
 
 =cut
 
-use strict;
-use warnings;
+use v5.40;
+use Mojo::Base 'Mojolicious', -signatures, -async_await;
+use CPAN::Testers::MCP::Server;
 
-
+sub startup( $self ) {
+  my $server = CPAN::Testers::MCP::Server->new;
+  $self->routes->any( '/' => $server->to_action );
+}
 
 1;
 
