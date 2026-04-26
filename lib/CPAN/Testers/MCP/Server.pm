@@ -14,6 +14,7 @@ use v5.40;
 use Mojo::Base 'MCP::Server', -signatures, -async_await;
 use Mojo::UserAgent;
 use Mojo::Promise;
+use Mojo::URL;
 use List::Util qw( maxstr );
 use Log::Any qw( $LOG );
 use Scalar::Util qw( blessed );
@@ -36,6 +37,10 @@ sub new($class, @args) {
         version => {
           type => 'string',
         },
+        from => {
+          type => 'string',
+          format => 'date-time',
+        },
         grade => {
           type => 'array',
           items => {
@@ -54,11 +59,14 @@ sub new($class, @args) {
         $version = maxstr map { $_->{version} } @{ $tx->res->json };
       }
 
-      my $url = sprintf 'https://api.cpantesters.org/v3/summary/%s/%s', $args->{dist}, $version;
+      my $url = Mojo::URL->new(sprintf 'https://api.cpantesters.org/v3/summary/%s/%s', $args->{dist}, $version);
+      if ($args->{from}) {
+        $url->query(since => $args->{from});
+      }
       my @reports;
       if (my $grade = $args->{grade}) {
         my $txs = await Mojo::Promise->all(
-          map { $self->ua->get_p( "$url?grade=$_" ) } @$grade,
+          map { $self->ua->get_p( $url->clone->query(grade => $_) ) } @$grade,
         );
         for my $tx ( @$txs ) {
           if (!blessed($tx) || !$tx->isa('Mojo::Transaction')) {
@@ -130,6 +138,36 @@ sub new($class, @args) {
       my $url = 'https://api.cpantesters.org/v3/report/' . $args->{guid};
       my $tx = await $self->ua->get_p( $url );
       return join "\n", values $tx->res->json('/result/output')->%*;
+    },
+  );
+
+  $self->prompt(
+    name => 'analyze_failures_for_dist',
+    description => 'Analyze the full text of failure reports for the current version of a distribution',
+    arguments => [
+      {
+        name => 'dist',
+        description => 'Distribution name',
+        required => 1,
+      },
+    ],
+    code => async sub ($prompt, $args) {
+      return sprintf "Read failing test reports for the \"%s\" distribution from the last month and analyze for common issues", $args->{dist};
+    },
+  );
+
+  $self->prompt(
+    name => 'analyze_failures_for_author',
+    description => 'Analyze the full text of failure reports for the current version of all your CPAN distributions.',
+    arguments => [
+      {
+        name => 'author',
+        description => 'Author PAUSE ID',
+        required => 1,
+      },
+    ],
+    code => async sub ($prompt, $args) {
+      return sprintf "Read failing test reports from the last month for all distributions authored by \"%s\" and analyze for the most important issues", $args->{author};
     },
   );
 
