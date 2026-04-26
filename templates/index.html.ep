@@ -1,3 +1,18 @@
-<h1>CPAN Testers MCP</h1>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
 
-<p>Point an MCP-compatible agent to <code>https://mcp.cpantesters.org</code> to add CPAN Testers data to your agent.</p>
+<main class="container">
+
+  <h1>CPAN Testers MCP</h1>
+
+  <p>Point an MCP-compatible agent to <code>https://mcp.cpantesters.org</code> to add CPAN Testers data to your agent.</p>
+
+  <h2>Example prompts</h2>
+
+  <blockquote>
+    List all failing test reports for distribution List::Util from the last month and analyze text for common issues.
+  </blockquote>
+  <blockquote>
+    List all failing test reports from the last month for distributions by SRI analyze text for issues that are easy to fix.
+  </blockquote>
+
+</main>
